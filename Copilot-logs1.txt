@@ -1,0 +1,20 @@
+Prompt:
+create a minimal C++ program that prints "Hello World" to the console
+
+Answer:
+GitHub Copilot: Using “Apply Patch”
+
+Reading [](file:///workspaces/csad2526ki405vaskevycholeh3/main.cpp)
+
+Using “Apply Patch”
+
+main.cpp +7 -1
+```
+#include <iostream>
+
+int main() {
+	std::cout << "Hello World" << std::endl;
+	return 0;
+}
+```
+A minimal C++ program that prints “Hello World” has been added to the main.cpp file.
