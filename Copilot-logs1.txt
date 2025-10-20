@@ -1,4 +1,4 @@
-Prompt:
+Prompt 1:
 create a minimal C++ program that prints "Hello World" to the console
 
 Answer:
@@ -18,3 +18,29 @@ int main() {
 }
 ```
 A minimal C++ program that prints “Hello World” has been added to the main.cpp file.
+
+
+Prompt 2:
+Create and fill README.md
+
+Answer:
+Vaskevych-O-O: Create and fill README.md
+
+Workspace: Enable Claude Sonnet 3.5 for all clients
+[object Object]
+
+Vaskevych-O-O: @workspace Enable: "Enable Claude Sonnet 3.5 for all clients"
+
+Workspace: Collecting workspace informationI'll help you create a comprehensive README.md file for this C++ project. I'll update the existing README.md with more detailed information.
+
+I updated the README.md file with detailed information about the project, including:
+
+1. Project title and description
+2. Student information
+3. Repository structure
+4. List of lab tasks
+5. Current project status
+6. Usage section
+7. Contact information
+
+README.md now contains all the necessary information about the project and its structure. The file is written in Ukrainian and has a clear structure using Markdown formatting.
