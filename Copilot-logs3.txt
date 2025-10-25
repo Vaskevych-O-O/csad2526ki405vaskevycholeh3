@@ -1,0 +1,151 @@
+Prompt 1:
+Create a function int add(int a, int b) in math_operations.h file.
+
+
+Answer:
+I'll mark the new todo as in-progress, add an inline `add(int,int)` function to math_operations.h, then mark the todo completed — final outcome: header now defines `inline int add(int a, int b)`. I'll update the todo list before and after the file edit. 
+
+Added 1 todo
+
+I'll open math_operations.h to see current content (if any), then add the function. 
+
+Read [](file:///workspaces/csad2526ki405vaskevycholeh3/math_operations.h)
+
+The file is empty — I will add header protection and the inline function `add`. I will apply the change.
+
+I updated the file and marked the task as completed in the list. 
+
+Completed (5/5) *Add add function*
+
+I added the requested function to math_operations.h.
+
+Files changed
+- math_operations.h — added include guard and an inline function:
+  - inline int add(int a, int b) { return a + b; }
+
+If you want, I can:
+- Add a small test or update main.cpp to use `add()` and print the result.
+- Or keep the header standalone for you to include where needed.
+
+
+
+Prompt 2:
+Now create a Unit Tests in unit_tests.cpp module
+
+
+Answer:
+I'm going to add a todo for creating unit tests, then write unit_tests.cpp with a small standalone test runner that checks `add()` behavior and returns non-zero on failure. Expected outcome: new test file created and todo updated. I'll add the todo now and then create the file. 
+
+Added 1 todo
+
+I'll open the existing unit_tests.cpp to see if it exists and its content, then update it. 
+
+Read [](file:///workspaces/csad2526ki405vaskevycholeh3/tests/unit_tests.cpp)
+
+I'll populate unit_tests.cpp with a minimal test harness: include `../math_operations.h`, run a few assertions for add(), print results, and return 0 on success otherwise 1. Then mark todo completed. 
+
+Updated the test file; now I will mark the task as completed in the to-do list. 
+
+Completed (6/6) *Create unit tests*
+
+I added a minimal unit-test runner at unit_tests.cpp that includes `../math_operations.h`, runs several checks of `add(int,int)`, prints failures, and returns 0 when all tests pass.
+
+Files changed:
+- unit_tests.cpp — added test harness checking add() with positive, zero, negative, and mixed inputs.
+
+How to build and run the tests locally
+1. Configure and build (from repo root):
+```bash
+cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+cmake --build build --config Release -- -j
+```
+2. Run the test binary:
+```bash
+./build/tests/unit_tests
+```
+
+Expected output when all is correct:
+```
+All tests passed
+```
+
+If you want, I can:
+- Add the test target to CMakeLists.txt so tests are built automatically and discoverable by CTest.
+- Run the build and tests here (I will ask for permission before running).
+
+
+
+Prompt 3:
+Now update CMakeLists.txt to add support for Google Test
+
+
+Answer:
+I'll add a todo item for enabling Google Test, then update CMakeLists.txt to fetch GoogleTest with FetchContent, create a `unit_tests` target (includes test sources and links to GTest), and register it with CTest. Expected outcome: CMakeLists.txt now downloads and configures Google Test and adds a test target. I'll update the todo status after the edit. 
+
+Added 1 todo
+
+I'll update CMakeLists.txt to add FetchContent for GoogleTest, create a `unit_tests` target that uses unit_tests.cpp, and register it with `add_test`. I'll ensure C++17 and proper link. 
+
+I updated CMakeLists.txt to include GoogleTest via FetchContent and added a `unit_tests` target. I'll mark the todo as completed. 
+
+Completed (7/7) *Add Google Test support*
+
+I updated CMakeLists.txt to add Google Test support and a proper `unit_tests` target.
+
+What I changed
+- Added FetchContent-based download of GoogleTest (release-1.14.0).
+- Created `unit_tests` executable from unit_tests.cpp.
+- Linked `unit_tests` with `gtest_main`.
+- Enabled testing and used `gtest_discover_tests(unit_tests)` to register tests with CTest.
+
+Next steps you can run locally
+1. Configure and build (this will download GoogleTest during configure):
+```bash
+cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+cmake --build build --config Release -- -j
+```
+2. Run tests with CTest:
+```bash
+ctest --test-dir build --output-on-failure
+```
+or run the binary directly:
+```bash
+./build/unit_tests
+```
+
+If you want, I can run the configure/build/tests here — tell me to proceed and I'll execute the commands.
+
+
+
+Prompt 4:
+Now let's update README.md and add instructions on how to create a test file and run tests. Add it into Stage 3
+
+
+Answer:
+I'll add a small README section under Stage 3 explaining how to create a Google Test file and run tests; first I'll add a todo entry, then update README.md, then mark the todo done. Expected outcome: README.md gains a clear "How to create a test file and run tests" subsection with example and commands. 
+
+Added 1 todo
+
+I'll update README.md and insert a subsection into Stage 3 with step-by-step instructions, an example test file skeleton, and commands to build and run tests. Then I'll mark the todo completed. 
+
+Read [](file:///workspaces/csad2526ki405vaskevycholeh3/README.md)
+
+I'll insert a Stage 3 subsection with test file example and commands. 
+
+I'll mark the README update todo as completed. 
+
+Completed (8/8) *Update README with test instructions*
+
+I updated README.md and added a clear "How to add a test file and run tests" subsection under Stage 3.
+
+What I changed
+- Inserted step-by-step instructions for creating a Google Test file (`tests/my_test.cpp`) with a code skeleton.
+- Added commands to re-run CMake, build the project, and run tests via `ctest` or by executing `./build/unit_tests`.
+- Added notes about adding test files to CMakeLists.txt and that CMake will download Google Test during configure.
+
+Where to look
+- README.md — the Stage 3 section now includes the test instructions and example code.
+
+Next steps (optional)
+- I can update CMakeLists.txt to automatically compile any `tests/*.cpp` files into the `unit_tests` target (globbing), or add more example tests into tests.
+- I can run the configure/build/test sequence here if you want (I'll ask for permission before executing).
