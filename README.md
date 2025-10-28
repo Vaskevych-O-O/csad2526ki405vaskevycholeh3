@@ -18,10 +18,17 @@ At this stage, the focus is on creating a **CMake build configuration** using **
 ## 📂 Repository Structure
 ```
 .
+├── tests/
+│    └── unit_tests.cpp  # Unit tests for math operations (Stage 3)
 ├── main.cpp             # Main program file (Stage 1)
 ├── CMakeLists.txt       # CMake configuration file (Stage 2)
+├── math_operations.h    # Declaration of functions (Stage 3)
+├── math_operations.cpp  # Implementation of functions (Stage 3)
+├── ci.sh                # CI build script for Linux/macOS (Stage 4)
 ├── Copilot-logs1.txt    # Copilot chat logs from Stage 1
 ├── Copilot-logs2.txt    # Copilot chat logs from Stage 2
+├── Copilot-logs3.txt    # Copilot chat logs from Stage 3
+├── Copilot-logs4.txt    # Copilot chat logs from Stage 4
 └── README.md            # Project documentation
 ```
 
@@ -51,7 +58,7 @@ The configuration enables easy compilation of the “Hello World” program usin
 All Copilot interactions for this stage are saved in the file:  
 `Copilot-logs2.txt`
 
-### 🏗️ Stage 3 — Unit Testing with Google Test
+### ✅ Stage 3 — Unit Testing with Google Test
 
 Using GitHub Copilot, unit testing was added to verify program functionality.
 
@@ -113,12 +120,98 @@ Notes:
 - During the first configure step CMake will download Google Test. Ensure your environment has network access.
 
 
+### 🏗️ Stage 4 — CI Script for Local Building
+
+At this stage, **a local CI script (`ci.sh`)** was created using **GitHub Copilot** to automate the build and testing process.
+The script simulates continuous integration locally by performing the following actions:
+
 ---
 
-## 🚀 Next Stages
-1. Implement CI build scripts (`ci.sh` / `ci.cmd`)  
-2. Configure GitHub Actions workflow for automatic builds  
-3. Verify CI/CD execution across all platforms  
+**🔧 Fixes and Improvements**
+
+- **Fixed** the incorrect Google Test linking in `CMakeLists.txt`, ensuring successful build and test discovery.
+
+- **Updated** `unit_tests.cpp` to use the proper Google Test framework structure.
+
+- **Verified** that CTest now correctly recognizes and runs all unit tests during the CI build.
+
+---
+
+**🧩 Updated `unit_tests.cpp`**
+```cpp
+#include <gtest/gtest.h>
+#include "../math_operations.h"
+
+// Test suite for addition function
+TEST(AdditionTest, PositiveNumbers) {
+    EXPECT_EQ(add(2, 3), 5);
+}
+
+TEST(AdditionTest, Zeros) {
+    EXPECT_EQ(add(0, 0), 0);
+}
+
+TEST(AdditionTest, NegativeNumbers) {
+    EXPECT_EQ(add(-4, -6), -10);
+}
+
+TEST(AdditionTest, MixedNumbers) {
+    EXPECT_EQ(add(-3, 7), 4);
+}
+```
+
+This ensures full compatibility with Google Test and provides better test coverage.
+
+---
+
+**⚙️ Script Overview**
+**File: `ci.sh`**
+
+1. Cleans the build directory (if exists)
+2. Configures the project with CMake
+3. Builds all targets (`hello` and `unit_tests`)
+4. Runs all available tests
+
+**Script contents (`ci.sh`):**
+```bash
+#!/bin/bash
+
+# To make this script executable, run:
+#   chmod +x ci.sh
+
+# Exit immediately if any command fails
+set -e
+
+# Create build directory if it doesn't exist
+mkdir -p build
+
+# Change into build directory
+cd build
+
+# Run CMake configuration
+cmake ..
+
+# Build the project
+cmake --build .
+
+# Run tests
+ctest --output-on-failure
+```
+
+**Usage:**
+```bash
+chmod +x ci.sh
+./ci.sh
+```
+
+This ensures consistent local builds and makes it easy to extend the process for **GitHub Actions CI/CD** in the next stage.
+All Copilot interactions for this stage are saved in `Copilot-logs4.txt`.
+
+---
+
+## 🚀 Next Stages 
+1. Configure GitHub Actions workflow for automatic builds  
+2. Verify CI/CD execution across all platforms  
 
 ---
 
