@@ -18,6 +18,9 @@ At this stage, the focus is on creating a **CMake build configuration** using **
 ## 📂 Repository Structure
 ```
 .
+├── .github/
+│     └── workflows/
+│             └── ci.yml # GitHub Actions workflow file (Stage 5)
 ├── tests/
 │    └── unit_tests.cpp  # Unit tests for math operations (Stage 3)
 ├── main.cpp             # Main program file (Stage 1)
@@ -120,7 +123,7 @@ Notes:
 - During the first configure step CMake will download Google Test. Ensure your environment has network access.
 
 
-### 🏗️ Stage 4 — CI Script for Local Building
+### ✅ Stage 4 — CI Script for Local Building
 
 At this stage, **a local CI script (`ci.sh`)** was created using **GitHub Copilot** to automate the build and testing process.
 The script simulates continuous integration locally by performing the following actions:
@@ -207,11 +210,34 @@ chmod +x ci.sh
 This ensures consistent local builds and makes it easy to extend the process for **GitHub Actions CI/CD** in the next stage.
 All Copilot interactions for this stage are saved in `Copilot-logs4.txt`.
 
+### 🏗️ Stage 5 — GitHub Actions Workflow (ci.yml)
+
+At this stage, a **cross-platform GitHub Actions workflow** was created to automate the build and testing process directly in the cloud.
+
+Using **GitHub Copilot Chat**, a ci.yml workflow file was generated inside .github/workflows/.
+
+**Workflow features:**
+
+- **Trigger**: runs on every `push` or `pull_request` to branches containing `develop` or `master` in their name.
+- **Job**: one job named `cross_build`.
+- **Strategy Matrix**: executes the build on
+    - `ubuntu-latest`
+    - `windows-latest`
+    - `macos-latest`
+
+- **Steps included in each build**:
+
+1. Checkout repository using actions/checkout@v4
+2. Install CMake (if not available)
+3. Run the configuration and build process via ci.sh
+4. Deploy step (currently a placeholder)
+
+All Copilot interactions for this stage are saved in `Copilot-logs5.txt`.
+
 ---
 
-## 🚀 Next Stages 
-1. Configure GitHub Actions workflow for automatic builds  
-2. Verify CI/CD execution across all platforms  
+## 🚀 Next Stages  
+1. Verify CI/CD execution across all platforms  
 
 ---
 
