@@ -1,0 +1,49 @@
+name: Cross-Platform CI
+
+on:
+  push:
+    branches:
+      - '*develop*'
+      - '*master*'
+  pull_request:
+    branches:
+      - '*develop*'
+      - '*master*'
+
+jobs:
+  cross_build:
+    name: Build on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up CMake
+      uses: lukka/get-cmake@latest
+
+    - name: Configure and Build
+      shell: bash
+      run: |
+        # Make the script executable (not needed on Windows)
+        if [[ "${{ matrix.os }}" != "windows-latest" ]]; then
+          chmod +x ./ci.sh
+        fi
+        
+        # Run the build script
+        ./ci.sh
+
+    - name: Run Tests
+      shell: bash
+      run: |
+        cd build
+        ctest --output-on-failure
+
+    - name: Deploy (Placeholder)
+      shell: bash
+      run: |
+        echo "Deploying for ${{ matrix.os }}"
+        echo "This is a placeholder for future deployment steps"

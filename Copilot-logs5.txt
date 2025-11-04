@@ -1,0 +1,63 @@
+Prompt 1:
+Create a GitHub Actions workflow file named ci.yml inside the .github/workflows/ directory.
+The workflow should:
+
+Trigger on push or pull request events to any branch that includes "develop" or "master" in its name.
+
+Contain a single job called cross_build.
+
+Use a matrix strategy to run on ubuntu-latest, windows-latest, and macos-latest.
+
+Include the following steps for each OS:
+
+Checkout the repository using actions/checkout@v4.
+
+Install CMake (if it’s not already available).
+
+Run the configuration and build script from Stage 3.
+
+Add a Deploy step (it can be a placeholder command for now).
+Make sure the workflow is syntactically correct and ready to commit.
+
+
+Answer:
+I'll create a GitHub Actions workflow file with the specified requirements. First, I'll make sure the workflows directory exists, then create the ci.yml file. 
+
+Created [](file:///workspaces/csad2526ki405vaskevycholeh3/.github/workflows)
+
+Now I'll create the workflow file with all the required specifications: 
+
+Created [](file:///workspaces/csad2526ki405vaskevycholeh3/.github/workflows/ci.yml)
+
+I've created the GitHub Actions workflow file with the following features:
+
+1. **Triggers**:
+   - Activates on push and pull request events
+   - Matches any branch containing "develop" or "master"
+
+2. **Job Configuration**:
+   - Single job named `cross_build`
+   - Matrix strategy for three operating systems
+   - Uses latest versions of Ubuntu, Windows, and macOS
+
+3. **Steps**:
+   - Checkout code using `actions/checkout@v4`
+   - Install CMake using `lukka/get-cmake@latest`
+   - Make ci.sh executable (skipped on Windows)
+   - Run the build script (ci.sh)
+   - Execute tests using CTest
+   - Placeholder deployment step
+
+4. **Special Considerations**:
+   - Uses bash shell consistently across all platforms
+   - Handles script permissions for Unix-like systems
+   - Separates build and test steps for better error reporting
+
+The workflow is ready to commit and will execute the cross-platform build process automatically when triggered.
+
+To test this workflow locally, you can:
+1. Commit the file
+2. Push to a branch with "develop" in its name
+3. Check the Actions tab in your GitHub repository
+
+Would you like me to make any adjustments to the workflow configuration?
